@@ -1,18 +1,9 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
 
-function App() {
+const KankaliTailors = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Welcome To New Kankali Tailors
-        </p>
-        
-      </header>
-    </div>
-  );
+    <div>KankaliTailors</div>
+  )
 }
 
-export default App;
+export default KankaliTailors
