@@ -1,9 +1,12 @@
 import React from 'react'
+import Routes from './routes';
 
-const KankaliTailors = () => {
+const App = () => {
   return (
-    <div>KankaliTailors</div>
+    <>
+      <Routes />
+    </>
   )
 }
 
-export default KankaliTailors
+export default App
