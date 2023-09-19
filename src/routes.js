@@ -1,24 +1,20 @@
 import React from 'react'
-import TopBar from './components/TopBar'
-import NavBar from './components/NavBar'
-import Components from './components/Components'
-import Trendy from './components/Trendy'
-import Vendors from './components/Vendors'
-import Footer from './components/Footer'
-import BackToTop from './components/BackToTop'
+import { useRoutes } from 'react-router-dom';
+import Homepage from './pages/Homepage';
+import ContactPage from './pages/ContactPage';
 
-const routes = () => {
-    return (
-        <>
-            <TopBar />
-            <NavBar />
-            <Components />
-            <Trendy/>
-            <Vendors/>
-            <Footer/>
-            <BackToTop/>
-        </>
-    )
+export default function Routes() {
+    const routes = useRoutes([
+
+        //! Homepage 
+        {
+            path:'/',
+            element:<Homepage/>
+        },
+        {
+            path:'/contactus',
+            element:<ContactPage/>
+        }
+    ]);
+    return routes;
 }
-
-export default routes
