@@ -14,8 +14,8 @@ export const ContactUsSlice = apiSlice.injectEndpoints({
 
         //! GET all the contacts
         getAllContacts: builder.query({
-            query: (page) => ({
-                url: `contact/company-wise-contact/?page=${page}`,
+            query: () => ({
+                url: `contacts`,
                 method: 'GET'
             }),
             providesTags: ['ContactUS']
@@ -106,7 +106,7 @@ export const ContactUsSlice = apiSlice.injectEndpoints({
         createContacts: builder.mutation({
             query: (newContactUS) => {
                 return {
-                    url: `contact/contact/`,
+                    url: `contacts/`,
                     method: 'POST',
                     body: newContactUS,
                 }
