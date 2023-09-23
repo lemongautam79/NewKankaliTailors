@@ -1,9 +1,41 @@
-import React from 'react'
+import React, { useState } from 'react'
 import TopBar from '../components/TopBar'
 import Footer from '../components/Footer'
 import NavBar from '../components/NavBar'
+import { useCreateContactsMutation } from '../api/ContactUsSlice'
 
 const ContactForm = () => {
+    //! Create ContactUs Messages 
+    const [createContactUS] = useCreateContactsMutation();
+
+    const [ContactData, setContactData] = useState({
+        name: '',
+        email: '',
+        subject: '',
+        message: '',
+    });
+
+    const handleInputChange = (event) => {
+        const { name, value } = event.target;
+        setContactData({
+            ...ContactData,
+            [name]: value,
+        });
+    };
+
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        console.log(ContactData);
+        createContactUS(ContactData);
+        setContactData({
+            name: '',
+            email: '',
+            subject: '',
+            message: '',
+        })
+    };
+
+
     return (
         <div className="container-fluid pt-5">
             <div className="text-center mb-4">
@@ -15,23 +47,66 @@ const ContactForm = () => {
                         <div id="success" />
                         <form name="sentMessage" id="contactForm" noValidate="novalidate">
                             <div className="control-group">
-                                <input type="text" className="form-control" id="name" placeholder="Your Name" required="required" data-validation-required-message="Please enter your name" />
+                                <input
+                                    type="text"
+                                    className="form-control"
+                                    id="name"
+                                    name="name"
+                                    value={ContactData.name}
+                                    onChange={handleInputChange}
+                                    placeholder="Your Name"
+                                    required="required"
+                                    data-validation-required-message="Please enter your name" />
                                 <p className="help-block text-danger" />
                             </div>
                             <div className="control-group">
-                                <input type="email" className="form-control" id="email" placeholder="Your Email" required="required" data-validation-required-message="Please enter your email" />
+                                <input
+                                    type="email"
+                                    className="form-control"
+                                    id="email"
+                                    name="email"
+                                    value={ContactData.email}
+                                    onChange={handleInputChange}
+                                    placeholder="Your Email"
+                                    required="required"
+                                    data-validation-required-message="Please enter your email" />
                                 <p className="help-block text-danger" />
                             </div>
                             <div className="control-group">
-                                <input type="text" className="form-control" id="subject" placeholder="Subject" required="required" data-validation-required-message="Please enter a subject" />
+                                <input
+                                    type="text"
+                                    className="form-control"
+                                    id="subject"
+                                    name="subject"
+                                    value={ContactData.subject}
+                                    onChange={handleInputChange}
+                                    placeholder="Subject"
+                                    required="required"
+                                    data-validation-required-message="Please enter a subject" />
                                 <p className="help-block text-danger" />
                             </div>
                             <div className="control-group">
-                                <textarea className="form-control" rows={6} id="message" placeholder="Message" required="required" data-validation-required-message="Please enter your message" defaultValue={""} />
+                                <textarea
+                                    className="form-control"
+                                    rows={6}
+                                    id="message"
+                                    name="message"
+                                    value={ContactData.message}
+                                    onChange={handleInputChange}
+                                    placeholder="Message"
+                                    required="required"
+                                    data-validation-required-message="Please enter your message"
+                                    defaultValue={""} />
                                 <p className="help-block text-danger" />
                             </div>
                             <div>
-                                <button className="btn btn-primary py-2 px-4" type="submit" id="sendMessageButton">Send
+                                <button
+                                    className="btn btn-primary py-2 px-4"
+                                    type="submit"
+                                    id="sendMessageButton"
+                                    onClick={(e) => handleSubmit(e)}
+                                >
+                                    Send
                                     Message</button>
                             </div>
                         </form>
@@ -63,7 +138,7 @@ const ContactPage = () => {
         <>
             <TopBar />
             {/* <NavBar/> */}
-            <ContactForm/>
+            <ContactForm />
             <Footer />
         </>
     )
