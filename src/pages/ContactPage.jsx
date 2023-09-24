@@ -3,6 +3,7 @@ import TopBar from '../components/TopBar'
 import Footer from '../components/Footer'
 import NavBar from '../components/NavBar'
 import { useCreateContactsMutation } from '../api/ContactUsSlice'
+import axios from 'axios'
 
 const ContactForm = () => {
     //! Create ContactUs Messages 
@@ -34,6 +35,25 @@ const ContactForm = () => {
             message: '',
         })
     };
+
+    //! Image Upload 
+
+    const [image, setImage] = useState();
+    const handleImageSubmit = (e) => {
+        console.log(e.target.files[0]);
+        setImage(e.target.files[0]);
+    }
+
+    const submitImage = async (e) => {
+        e.preventDefault();
+
+        const formData = new FormData();
+        formData.append("image", image);
+
+        const result = await axios.post(
+            "http://localhost:8000/upload-image", formData, { headers: { "Content-Type": "multipart/form-data" } }
+        )
+    }
 
 
     return (
@@ -98,6 +118,11 @@ const ContactForm = () => {
                                     data-validation-required-message="Please enter your message"
                                     defaultValue={""} />
                                 <p className="help-block text-danger" />
+                            </div>
+                            <div className="control-group">
+                                <input type="file" className="file" accept="image/*" onChange={handleImageSubmit}>
+                                </input>
+                                <button type="button" onClick={submitImage}>Submit</button>
                             </div>
                             <div>
                                 <button

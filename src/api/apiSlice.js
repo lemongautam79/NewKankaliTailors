@@ -6,7 +6,8 @@ export const apiSlice = createApi({
     reducerPath: "api", // optional
     baseQuery: fetchBaseQuery({baseUrl:BASE_URL}),
     tagTypes: [
-        'ContactUS'
+        'ContactUS',
+        'Image'
     ],
     endpoints: (builder) => ({}),
 });

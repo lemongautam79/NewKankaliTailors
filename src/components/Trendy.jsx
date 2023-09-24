@@ -1,6 +1,10 @@
 import React from 'react'
+import { useGetAllImagesQuery } from '../api/ImageSlice'
 
 const Trendy = () => {
+    //! Get all images
+    const { data } = useGetAllImagesQuery();
+    // console.log(data)
     return (
         <>
             <div className="container-fluid pt-5">
@@ -8,6 +12,16 @@ const Trendy = () => {
                     <h2 className="section-title px-5"><span className="px-2">Trandy Products</span></h2>
                 </div>
                 <div className="row px-xl-5 pb-3">
+
+                    {data && data.data.map((image, index) => (
+                        <div className="col-lg-3 col-md-6 col-sm-12 pb-1">
+                            <div className="card product-item border-0 mb-4">
+                                <div className="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
+                                    <img className="img-fluid w-100" src={`require('./images/${data.image})`} alt height={100} width={100}/>
+                                </div>
+                            </div>
+                        </div>
+                    ))}
                     <div className="col-lg-3 col-md-6 col-sm-12 pb-1">
                         <div className="card product-item border-0 mb-4">
                             <div className="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
@@ -25,6 +39,7 @@ const Trendy = () => {
                             </div>
                         </div>
                     </div>
+
                     <div className="col-lg-3 col-md-6 col-sm-12 pb-1">
                         <div className="card product-item border-0 mb-4">
                             <div className="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
