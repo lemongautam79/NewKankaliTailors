@@ -2,12 +2,15 @@ import React, { useState } from 'react'
 import TopBar from '../components/TopBar'
 import Footer from '../components/Footer'
 import NavBar from '../components/NavBar'
-import { useCreateContactsMutation } from '../api/ContactUsSlice'
+import { useCreateContactsMutation, useSendMailMutation } from '../api/ContactUsSlice'
 import axios from 'axios'
 
 const ContactForm = () => {
     //! Create ContactUs Messages 
     const [createContactUS] = useCreateContactsMutation();
+
+    //! Send Mail
+    const [sendMail] = useSendMailMutation();
 
     const [ContactData, setContactData] = useState({
         name: '',
@@ -26,8 +29,9 @@ const ContactForm = () => {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        console.log(ContactData);
+        // console.log(ContactData);
         createContactUS(ContactData);
+        sendMail({email:ContactData.email})
         setContactData({
             name: '',
             email: '',
