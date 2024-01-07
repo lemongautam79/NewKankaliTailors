@@ -9,6 +9,7 @@ const routes = () => {
             <Routes>
                 <Route path="/" element={<Homepage />} />
                 <Route path="/contactus" element={<ContactPage />} />
+                <Route path="/cart" element={<ContactPage />} />
             </Routes>
         </>
     )
